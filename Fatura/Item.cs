@@ -12,7 +12,16 @@ public class Item
     }
     public int Quantidade { get; set; }
     public float Preco {
-        get; set;
+        get => Preco;
+        set
+        {
+            if (value > 0) { 
+            Preco= value;
+            } else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 
     #endregion
