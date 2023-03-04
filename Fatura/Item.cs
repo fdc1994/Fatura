@@ -6,20 +6,42 @@ public class Item
 
     #region Propriedades
 
+    private Produto _produto;
     public Produto produto {
 
-        get; set;
-    }
-    public int Quantidade { get; set; }
-    public float Preco {
-        get => Preco;
+        get
+        {
+            return _produto;
+        }
         set
         {
-            if (value > 0) { 
-            Preco= value;
+           if(value!= _produto && value != null)
+            {
+                _produto= value;    
+            } 
+            else
+            {
+                throw new ArgumentNullException("O produto não pode ser nulo");
+            }
+        }
+    }
+    public int quantidade { get; set; }
+
+    private float _preco;
+
+    public float preco
+    {
+        get
+        {
+            return _preco;
+        }
+        set
+        {
+            if(value <= 0) { 
+                throw new ArgumentOutOfRangeException("O preço deve ser superior a 0");
             } else
             {
-                throw new ArgumentOutOfRangeException();
+                _preco = value;
             }
         }
     }
@@ -35,8 +57,8 @@ public class Item
     public Item(Produto produtoNovo, int quantidade) : this()
     {
         this.produto = produtoNovo;
-        this.Quantidade = quantidade;
-        this.Preco = produto.precoComDesconto()*quantidade;
+        this.quantidade = quantidade;
+        this.preco = produto.precoComDesconto()*quantidade;
     }
 
 
